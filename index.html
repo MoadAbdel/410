@@ -8,22 +8,34 @@
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
             // Vérifier si un compteur existe déjà dans localStorage
-            let compteur = localStorage.getItem('compteur');
-            if (compteur === null) {
-                compteur = 0;
+            let montant = localStorage.getItem('montant');
+            if (montant === null) {
+                montant = 0;
             } else {
-                compteur = parseFloat(compteur);
+                montant = parseFloat(montant);
             }
 
-            // Afficher le compteur initial
-            const compteurElement = document.getElementById('compteur');
-            compteurElement.textContent = compteur.toFixed(2) + ' euros';
+            let nombreCafe = localStorage.getItem('nombreCafe');
+            if (nombreCafe === null) {
+                nombreCafe = 0;
+            } else {
+                nombreCafe = parseInt(nombreCafe, 10);
+            }
+
+            // Afficher le montant et le nombre de cafés initial
+            const montantElement = document.getElementById('montant');
+            const nombreCafeElement = document.getElementById('nombreCafe');
+            montantElement.textContent = montant.toFixed(2) + ' euros';
+            nombreCafeElement.textContent = nombreCafe;
 
             // Ajouter un événement au bouton pour augmenter le compteur
             document.getElementById('increment').addEventListener('click', () => {
-                compteur += 2.80;
-                compteurElement.textContent = compteur.toFixed(2) + ' euros';
-                localStorage.setItem('compteur', compteur);
+                montant += 2.80;
+                nombreCafe += 1;
+                montantElement.textContent = montant.toFixed(2) + ' euros';
+                nombreCafeElement.textContent = nombreCafe;
+                localStorage.setItem('montant', montant);
+                localStorage.setItem('nombreCafe', nombreCafe);
             });
         });
     </script>
@@ -31,8 +43,9 @@
 <body>
     <div class="container">
         <h1>Compteur de café de 410 :</h1>
-        <p>Montant total : <span id="compteur">0.00 euros</span></p>
-        <button id="increment">+1</button>
+        <p>Nombre de cafés : <span id="nombreCafe">0</span></p>
+        <p>Montant total : <span id="montant">0.00 euros</span></p>
+        <button id="increment">+1 Café</button>
     </div>
 </body>
 </html>
