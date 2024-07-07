@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compteur de Café</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Vérifier si un compteur existe déjà dans localStorage
+            let compteur = localStorage.getItem('compteur');
+            if (compteur === null) {
+                compteur = 0;
+            } else {
+                compteur = parseFloat(compteur);
+            }
+
+            // Afficher le compteur initial
+            const compteurElement = document.getElementById('compteur');
+            compteurElement.textContent = compteur.toFixed(2) + ' euros';
+
+            // Ajouter un événement au bouton pour augmenter le compteur
+            document.getElementById('increment').addEventListener('click', () => {
+                compteur += 2.80;
+                compteurElement.textContent = compteur.toFixed(2) + ' euros';
+                localStorage.setItem('compteur', compteur);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Compteur de café de 410 :</h1>
+        <p>Montant total : <span id="compteur">0.00 euros</span></p>
+        <button id="increment">+1</button>
+    </div>
+</body>
+</html>
